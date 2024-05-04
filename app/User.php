@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password','bio','images',
     ];
 
     /**
@@ -26,4 +26,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function followings()
+    {
+        return $this->hasMany(Follow::class, 'followed_id', 'id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    public function followingsCount()
+    {
+        return Follow::where('following_id', $this->id)
+                    ->distinct('followed_id')
+                    ->count('followed_id');
+    }
+
+    public function followersCount()
+    {
+        return Follow::where('followed_id', $this->id)
+                    ->distinct('following_id')
+                    ->count('following_id');
+    }
 }

@@ -1,4 +1,4 @@
-<IfModule mod_rewrite.c>
+<IfModule mod_rewrite.c>/Users/tatsuya/AtlasSNS_tatsuyaiino/public/.htaccess
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>

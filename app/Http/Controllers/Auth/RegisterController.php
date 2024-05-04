@@ -39,25 +39,45 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         if($request->isMethod('post')){
-
-            $username = $request->input('username');
-            $mail = $request->input('mail');
-            $password = $request->input('password');
-
-            User::create([
-                'username' => $username,
-                'mail' => $mail,
-                'password' => bcrypt($password),
+            $request->validate([
+                'username' => 'required|min:2|max:12',
+                'mail'     => 'required|email|unique:users,mail|min:5|max:40',
+                'password' => 'required|alpha_num|min:8|max:20',
+                'password_confirmation' => 'required|alpha_num|min:8|max:20|same:password',
             ]);
 
-            return redirect('added');
+            try {
+                $username = $request->input('username');
+                $mail     = $request->input('mail');
+                $password = $request->input('password');
+
+                User::create([
+                    'username' => $username,
+                    'mail'     => $mail,
+                    'password' => bcrypt($password),
+                ]);
+                return redirect('/added')->with('username', $username);
+            } catch (\Exception $e) {
+                return back()->withErrors(['error' => '登録中にエラーが発生しました。'])->withInput();
+            }
         }
         return view('auth.register');
     }
 
-    public function added(){
-        return view('auth.added');
+    public function redirectPath()
+    {
+        return '/index';
+    }
+
+    public function added()
+    {
+        $username = session('username');
+        if (!$username) {
+            return redirect('/register');
+        }
+        return view('auth.added', compact('username'));
     }
 }

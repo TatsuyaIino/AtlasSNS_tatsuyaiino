@@ -1,10 +1,148 @@
 @charset "UTF-8";
 
-html{
+/* 共通 */
+
+html {
     height: 100%;
 }
 
-body{
+body {
     height: 100%;
-    background: #186AC9;
+    background-image: linear-gradient(to bottom, #0067C6 0%, #2888E1 25%, #53ACFF 50%, #9DC4A3 75%, #FDE22E 100%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-danger {
+    color: red;
+    text-align: left;
+}
+
+.logout_header img {
+    width: 150px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.logout_header p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 50px;
+}
+
+.login_text,
+.register_text {
+    font-size: 18px;
+}
+
+.login_label,
+.register_label {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.login_btn,
+.register_btn {
+    display: block;
+    margin: 20px auto;
+    margin-left: 115px;
+    padding: 8px 35px;
+    font-size: 16px;
+    background-color: #ED3B50;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.login_content,
+.register_content,
+#clear {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: none;
+    color: #fff;
+    width: 250px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_mail,
+.login_pass,
+.register_username,
+.register_mail,
+.register_pass {
+    text-align: left;
+    margin-top: 20px;
+
+}
+
+.login_mail .input,
+.login_pass .input,
+.register_username .input,
+.register_mail .input,
+.register_pass .input {
+    width: 250px;
+    height: 40px;
+    border-radius: 7px;
+    border: 0.5px solid #000;
+    font-size: 20px;
+}
+
+.button {
+    margin-bottom: 20px;
+}
+
+/* register */
+
+.new_user a,
+.login_back a {
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 15px;
+}
+
+/* added */
+
+#clear {
+    text-align: center;
+}
+
+.added_username {
+    font-size: 16px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.added_text {
+    font-size: 16px;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.loginBack_btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background-color: #ED3B50;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.loginBack_btn a {
+    color: #fff;
 }

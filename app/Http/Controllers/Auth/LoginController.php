@@ -44,11 +44,23 @@ class LoginController extends Controller
 
             $data=$request->only('mail','password');
             // ログインが成功したら、トップページへ
-            //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
                 return redirect('/top');
+            } else {
+                // ログイン失敗時にエラーメッセージをセッションに格納
+                return redirect()->back()->withInput($request->only('mail', 'password'))->withErrors([
+                    'message' => 'ログインに失敗しました。メールアドレスまたはパスワードが間違っています。'
+                ]);
             }
         }
         return view("auth.login");
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }
