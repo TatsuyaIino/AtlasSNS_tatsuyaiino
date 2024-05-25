@@ -34,9 +34,20 @@
             @if($post->user->id == $user->id)
                 <div class="post_actions">
                     <a href="#" class="edit_btn" data-id="{{ $post->id }}"><img src="images/edit.png" alt="Edit"></a>
-                    <a href="{{ url('delete/' . $post->id) }}"><img class="delete_icon" src="images/trash.png" alt="Delete"></a>
+                    <a href="#" onclick="confirmDeletion('{{ url('delete/' . $post->id) }}')">
+                        <img class="delete_icon" src="images/trash.png" alt="Delete">
+                    </a>
                 </div>
             @endif
+            <div id="confirmationModal" class="modal">
+                <div class="modal_delete">
+                    <p>この投稿を削除します。よろしいでしょうか？</p>
+                    <div class="button_container">
+                        <button id="confirmDeleteButton">OK</button>
+                        <button id="cancelButton">キャンセル</button>
+                    </div>
+                </div>
+            </div>
             <div id="editModal{{ $post->id }}" class="modal_container">
                 <div class="modal_body">
                     {!! Form::open(['url' => '/edit', 'method' => 'post']) !!}

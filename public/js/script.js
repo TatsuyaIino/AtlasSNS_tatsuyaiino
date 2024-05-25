@@ -41,4 +41,28 @@ $(document).ready(function () {
       $('#customText').text('選択されていません');
     }
   });
+
+  function confirmDeletion(deleteUrl) {
+    var $modal = $('#confirmationModal');
+    var $confirmButton = $('#confirmDeleteButton');
+    $modal.show();
+
+    $confirmButton.off('click').on('click', function () {
+      window.location.href = deleteUrl;
+    });
+  }
+  function closeModal() {
+    $('#confirmationModal').hide();
+  }
+
+  var $cancelButton = $('#cancelButton');
+  $cancelButton.on('click', closeModal);
+
+  $(window).on('click', function (event) {
+    var $modal = $('#confirmationModal');
+    if ($(event.target).is($modal)) {
+      $modal.hide();
+    }
+  });
+  window.confirmDeletion = confirmDeletion;
 });
